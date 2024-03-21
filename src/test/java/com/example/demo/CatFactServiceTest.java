@@ -7,7 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.web.client.MockRestServiceServer;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.client.RestClient;
+import org.springframework.web.client.RestTemplate;
 
 import static org.hamcrest.Matchers.is;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
@@ -28,11 +28,11 @@ class CatFactServiceTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private RestClient.Builder restClientBuilder;
+    private RestTemplate restTemplate;
 
     @BeforeEach
     void setUp() {
-        server = MockRestServiceServer.bindTo(restClientBuilder).build();
+        server = MockRestServiceServer.createServer(restTemplate);
     }
 
     @Test

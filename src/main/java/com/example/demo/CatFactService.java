@@ -1,20 +1,18 @@
 package com.example.demo;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
+import org.springframework.web.client.RestTemplate;
 
 @Service
 public class CatFactService {
-  private final RestClient restClient;
+    private final RestTemplate restTemplate;
 
-  public CatFactService(RestClient restClient) {
-    this.restClient = restClient;
-  }
+    public CatFactService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
-  public CatFact getFact() {
-    return restClient.get()
-        .uri("/fact")
-        .retrieve()
-        .body(CatFact.class);
-  }
+    public CatFact getFact() {
+        return restTemplate.getForObject("/fact", CatFact.class);
+
+    }
 }
